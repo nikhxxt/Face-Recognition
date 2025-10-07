@@ -2,3 +2,5 @@ numpy>=2.3.0
 opencv-python-headless>=4.9.0.80
 streamlit==1.50.0
 setuptools>=68.0.0
+face_recognition
+dlib
