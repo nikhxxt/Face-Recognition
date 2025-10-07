@@ -4,13 +4,14 @@ import numpy as np
 
 st.title("Face Recognition Demo")
 
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "png"])
-if uploaded_file:
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+# Use webcam-style capture
+image_data = st.camera_input("Take a picture")
+if image_data:
+    file_bytes = np.asarray(bytearray(image_data.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, 1)
-    st.image(img, channels="BGR", caption="Uploaded Image")
+    st.image(img, channels="BGR", caption="Captured Image")
 
-    # Example face detection
+    # Face detection using Haar cascades
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
